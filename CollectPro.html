@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>CollectPro v2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#F5F3FA;--sf:#FFFFFF;--sf2:#EEE9F8;--bd:#DDD6F0;
+  --tx:#1E1535;--tx2:#6B5F8A;--tx3:#A99CC5;
+  --P:#6B3FA0;--Pm:#8B5CC8;--Pl:#EDE5FA;--Pd:#4A2875;
+  --Y:#D4A017;--Yl:#FEF9E6;--Yd:#8A6410;
+  --B:#1A5CB8;--Bl:#E3EEFA;--Bm:#2E74D4;
+  --G:#1D7A46;--Gl:#E3F5EC;
+  --R:#C0392B;--Rl:#FDECEC;
+  --W:#B5650A;--Wl:#FEF3E2;
+  --r:10px;--rl:16px;--rxl:20px;
+  --font:'Plus Jakarta Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+html,body{height:100%;background:var(--bg);font-family:var(--font);color:var(--tx);font-size:14px}
+#app{min-height:100vh;display:flex;flex-direction:column}
+
+/* ── BANNER ── */
+.banner{background:linear-gradient(135deg,#3D1F6E,#6B3FA0 55%,#2255A8);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.co-row{display:flex;align-items:center;gap:0;overflow:hidden;flex:1}
+.copill{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:16px;font-size:11px;font-weight:600;color:#fff;white-space:nowrap}
+.cpg{background:rgba(212,160,23,.28);border:1px solid rgba(244,200,66,.5)}
+.cpp{background:rgba(255,255,255,.13);border:1px solid rgba(144,200,248,.4)}
+.cdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.cdg{background:#F4C842}.cdp{background:#90C8F8}
+.csep{width:1px;height:18px;background:rgba(255,255,255,.2);margin:0 8px;flex-shrink:0}
+.bname{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);flex-shrink:0;margin-left:8px}
+
+/* ── SCREENS ── */
+.scr{display:none;flex:1;flex-direction:column}.scr.on{display:flex}
+
+/* ── LOGIN ── */
+.login-pg{flex:1;overflow-y:auto;padding:24px 16px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:28px}
+.lcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rxl);padding:26px 20px;width:100%;max-width:400px;box-shadow:0 6px 24px rgba(107,63,160,.12)}
+.logo{width:50px;height:50px;background:linear-gradient(135deg,var(--P),var(--Bm));border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:#fff;font-size:17px;font-weight:700}
+.cotags{display:flex;gap:6px;justify-content:center;margin:8px 0 4px}
+.ctag{padding:3px 9px;border-radius:10px;font-size:10px;font-weight:600}
+.ctg{background:var(--Yl);color:var(--Yd);border:1px solid rgba(212,160,23,.3)}
+.ctp{background:var(--Bl);color:var(--B);border:1px solid rgba(26,92,184,.25)}
+.tabrow{display:flex;background:var(--sf2);border-radius:var(--r);padding:3px;margin:16px 0 14px;gap:3px}
+.tabbtn{flex:1;padding:8px;text-align:center;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--tx2);transition:.14s}
+.tabbtn.on{background:var(--sf);color:var(--P);font-weight:700;box-shadow:0 1px 4px rgba(107,63,160,.12)}
+
+/* ── FORMS ── */
+.fg{margin-bottom:12px}
+.fl{display:block;font-size:10px;color:var(--tx2);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.fi{width:100%;padding:10px 12px;border:1.5px solid var(--bd);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--tx);background:var(--sf);outline:none;transition:.14s;-webkit-appearance:none}
+.fi:focus{border-color:var(--Pm);box-shadow:0 0 0 3px rgba(107,63,160,.10)}
+textarea.fi{resize:vertical;min-height:100px;font-size:13px;line-height:1.5}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:var(--r);border:1px solid var(--bd);background:var(--sf);color:var(--tx);font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;transition:.14s;-webkit-appearance:none}
+.btn:active{transform:scale(.97)}
+.bp{background:var(--P);color:#fff;border-color:var(--P)}.bp:active{background:var(--Pd)}
+.by{background:var(--Y);color:#fff;border-color:var(--Y)}.by:active{background:var(--Yd)}
+.bb{background:var(--B);color:#fff;border-color:var(--B)}.bb:active{background:#144a96}
+.br{background:var(--R);color:#fff;border-color:var(--R)}
+.bg-btn{background:var(--G);color:#fff;border-color:var(--G)}
+.bfull{width:100%}.bsm{padding:7px 12px;font-size:12px}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--sf);border-bottom:1px solid var(--bd);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.tbl{display:flex;flex-direction:column}
+.tbt{font-size:14px;font-weight:700;color:var(--P)}.tbs{font-size:11px;color:var(--tx2);margin-top:1px}
+.tbr{display:flex;align-items:center;gap:7px}
+
+/* ── TAB BAR ── */
+.tabbar{display:flex;overflow-x:auto;background:var(--sf);border-bottom:2px solid var(--bd);flex-shrink:0;scrollbar-width:none}
+.tabbar::-webkit-scrollbar{display:none}
+.tbi{flex-shrink:0;padding:11px 14px;font-size:12px;font-weight:500;color:var(--tx2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:.14s}
+.tbi.on{color:var(--P);border-bottom-color:var(--P);font-weight:700}
+
+/* ── SCROLL ── */
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px 80px}
+
+/* ── INVOICE CARDS ── */
+.icard{background:var(--sf);border:1.5px solid var(--bd);border-radius:var(--rl);padding:14px;margin-bottom:10px}
+.icard.issued{border-color:var(--Y);border-width:2px;background:#FFFDF0}
+.issued-lbl{display:inline-flex;align-items:center;gap:4px;background:var(--Yl);color:var(--Yd);padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px}
+.itop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.ino{font-family:var(--mono);font-size:11px;color:var(--P);background:var(--Pl);padding:2px 8px;border-radius:6px;font-weight:500}
+.icust{font-size:14px;font-weight:700;margin-top:3px;line-height:1.3}
+.imeta{font-size:11px;color:var(--tx2);margin-top:2px}
+.ibal{text-align:right}
+.ibal-v{font-size:20px;font-weight:700;color:var(--P);font-family:var(--mono);line-height:1}
+.ibal-l{font-size:10px;color:var(--tx3);margin-top:2px}
+.iamts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0;background:var(--sf2);padding:10px;border-radius:8px}
+.ab{text-align:center}
+.av{font-size:13px;font-weight:700;font-family:var(--mono)}
+.al{font-size:9px;color:var(--tx3);text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
+.tcoll{background:var(--Gl);padding:7px 10px;border-radius:7px;font-size:12px;color:var(--G);font-weight:600;margin-bottom:8px}
+
+/* ── BADGES ── */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.bgg{background:var(--Gl);color:var(--G)}.bga{background:var(--Wl);color:var(--W)}
+.bgr{background:var(--Rl);color:var(--R)}.bgb{background:var(--Bl);color:var(--B)}
+.bgp{background:var(--Pl);color:var(--Pd)}.bgy{background:var(--Yl);color:var(--Yd)}
+.bggr{background:var(--sf2);color:var(--tx2)}
+
+/* ── OVERLAY (bottom sheet) ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(30,21,53,.5);z-index:200;align-items:flex-end;justify-content:center}
+.overlay.on{display:flex}
+.bsheet{background:var(--sf);border-radius:20px 20px 0 0;padding:20px 18px 32px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto}
+.bsh-handle{width:40px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 14px}
+.bsh-title{font-size:16px;font-weight:700;color:var(--P);margin-bottom:14px;padding-bottom:10px;border-bottom:1.5px solid var(--bd)}
+.inv-box{background:var(--Pl);border-left:4px solid var(--P);padding:12px;border-radius:var(--r);margin-bottom:14px;font-size:13px}
+
+/* ── ADMIN ── */
+.adm-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.adm-nav{display:flex;overflow-x:auto;background:var(--sf);border-bottom:1px solid var(--bd);flex-shrink:0;scrollbar-width:none}
+.adm-nav::-webkit-scrollbar{display:none}
+.anav{flex-shrink:0;padding:10px 13px;font-size:12px;font-weight:600;color:var(--tx2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:.14s}
+.anav.on{color:var(--P);border-bottom-color:var(--P)}
+.acontent{flex:1;overflow-y:auto;padding:14px 12px 80px;background:var(--bg)}
+
+/* ── STAT CARDS ── */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.sc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:14px;border-top:3px solid var(--P)}
+.sc.sy{border-top-color:var(--Y)}.sc.sb{border-top-color:var(--B)}.sc.sr{border-top-color:var(--R)}
+.scv{font-size:20px;font-weight:700;line-height:1.1;font-family:var(--mono)}
+.sc.sp .scv{color:var(--P)}.sc.sy .scv{color:var(--Yd)}.sc.sb .scv{color:var(--B)}.sc.sr .scv{color:var(--R)}
+.scl{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.sci{font-size:18px;margin-bottom:4px}
+
+/* ── TABLES ── */
+.twrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--bd);background:var(--sf)}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:440px}
+thead tr{background:var(--sf2)}
+th{padding:9px 10px;text-align:left;font-weight:700;font-size:10px;color:var(--Pd);border-bottom:1px solid var(--bd);white-space:nowrap;text-transform:uppercase;letter-spacing:.4px}
+td{padding:9px 10px;border-bottom:1px solid var(--bd);color:var(--tx);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.mono{font-family:var(--mono);font-size:12px}
+
+/* ── CARDS ── */
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:14px;margin-bottom:12px}
+.card h3{font-size:13px;font-weight:700;margin-bottom:10px}
+.stitle{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--tx);display:flex;align-items:center;gap:8px}
+.stitle::before{content:'';display:block;width:4px;height:15px;background:var(--P);border-radius:2px;flex-shrink:0}
+.fbar{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:12px;margin-bottom:12px}
+.tbar{background:linear-gradient(135deg,var(--Pl),var(--Bl));border:1.5px solid var(--bd);border-radius:var(--rl);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.rowitem{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bd)}
+.rowitem:last-child{border-bottom:none}
+.tag{display:inline-block;padding:2px 8px;background:var(--Pl);border-radius:5px;font-size:11px;color:var(--Pd);font-weight:600}
+.tagy{background:var(--Yl);color:var(--Yd)}.tagb{background:var(--Bl);color:var(--B)}
+.hint{background:var(--sf2);border-radius:var(--r);padding:10px 12px;font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:12px}
+.hint code{font-family:var(--mono);font-size:11px;background:var(--Pl);padding:1px 5px;border-radius:4px;color:var(--Pd)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* ── BEAT CARDS ── */
+.bcard{background:var(--sf);border:1.5px solid var(--bd);border-radius:var(--rl);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.bcard.done{border-color:var(--G);background:var(--Gl)}
+
+/* ── TOAST / SPINNER ── */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--P);color:#fff;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center}
+#toast.show{opacity:1}#toast.err{background:var(--R)}
+#spin{display:none;position:fixed;inset:0;background:rgba(245,243,250,.75);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+#spin.on{display:flex}
+.ring{width:34px;height:34px;border:3px solid var(--bd);border-top-color:var(--P);border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:36px 16px;color:var(--tx3)}
+.empty-ico{font-size:30px;margin-bottom:8px}
+.flex{display:flex}.ac{align-items:center}.jb{justify-content:space-between}
+.mt2{margin-top:8px}.mt3{margin-top:14px}.mb2{margin-bottom:8px}.mb3{margin-bottom:14px}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+
+/* ══════════════════════════════════════
+   PRINT STYLES  — A4 Landscape Large Font
+══════════════════════════════════════ */
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { height: auto; overflow: visible; background: #fff; font-size: 13pt; }
+  #app, .scr { display: block !important; height: auto; overflow: visible; }
+  .no-print, .banner, .topbar, .tabbar, .adm-nav, #toast, #spin,
+  .overlay, .btn, .bcard, .fbar, .stitle { display: none !important; }
+  #print-area { display: block !important; }
+  .print-page {
+    page-break-after: always;
+    width: 100%; padding: 10mm 12mm; font-family: Arial, sans-serif;
+  }
+  .print-page:last-child { page-break-after: avoid; }
+  .ph { /* page header */
+    display: flex; justify-content: space-between; align-items: flex-start;
+    border-bottom: 2px solid #4A2875; padding-bottom: 8pt; margin-bottom: 10pt;
+  }
+  .ph-left h2 { font-size: 16pt; font-weight: bold; color: #4A2875; margin-bottom: 3pt; }
+  .ph-left p  { font-size: 11pt; color: #555; }
+  .ph-right   { text-align: right; font-size: 10pt; color: #555; }
+  .ph-right strong { font-size: 13pt; color: #1E1535; display: block; }
+  .ptable { width: 100%; border-collapse: collapse; margin-top: 6pt; font-size: 12pt; }
+  .ptable th { background: #4A2875 !important; color: #fff !important; padding: 7pt 8pt; text-align: left; font-size: 11pt; white-space: nowrap; }
+  .ptable td { padding: 7pt 8pt; border-bottom: 1pt solid #DDD; vertical-align: top; }
+  .ptable tr:nth-child(even) td { background: #F8F6FF; }
+  .ptable tr.issued-row td { background: #FFFBEA !important; }
+  .ptable .mono { font-family: 'Courier New', monospace; font-size: 11pt; }
+  .ptable .right { text-align: right; }
+  .ptable .bold  { font-weight: bold; }
+  .ptable .aged-hi { color: #C0392B; font-weight: bold; }
+  .ptable .aged-med { color: #B5650A; }
+  .ptable .coll-col { background: #f0f0f0; } /* empty collection cols */
+  .pfoot { margin-top: 10pt; border-top: 1pt solid #DDD; padding-top: 6pt; display: flex; justify-content: space-between; font-size: 10pt; color: #777; }
+  .psumm { background: #F0EBF8; padding: 6pt 10pt; border-radius: 4pt; margin-top: 8pt; font-size: 11pt; }
+  .psumm span { margin-right: 24pt; font-weight: bold; color: #4A2875; }
+  @page { size: A4 landscape; margin: 8mm 10mm; }
+}
+#print-area { display: none; }
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- BANNER — always shown -->
+<div class="banner no-print">
+  <div class="co-row">
+    <div class="copill cpg"><span class="cdot cdg"></span>G-Five Food Services Pvt Ltd</div>
+    <div class="csep"></div>
+    <div class="copill cpp"><span class="cdot cdp"></span>Provita Medical Pvt Ltd</div>
+  </div>
+  <div class="bname">CollectPro</div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div id="sc-login" class="scr on">
+  <div class="login-pg">
+    <div class="lcard">
+      <div style="text-align:center;margin-bottom:16px">
+        <div class="logo">CP</div>
+        <div style="font-size:18px;font-weight:700;margin-top:6px">CollectPro</div>
+        <div class="cotags"><span class="ctag ctg">G-Five Food Services</span><span class="ctag ctp">Provita Medical</span></div>
+        <div style="font-size:11px;color:var(--tx3)">Payment Collection System v2</div>
+      </div>
+      <div class="tabrow">
+        <div class="tabbtn on" id="lt-sm" onclick="setLTab('sm')">Salesman</div>
+        <div class="tabbtn" id="lt-op" onclick="setLTab('op')">Operator</div>
+        <div class="tabbtn" id="lt-ad" onclick="setLTab('ad')">Admin</div>
+      </div>
+      <!-- Salesman -->
+      <div id="lf-sm">
+        <div class="fg"><label class="fl">Company</label>
+          <select id="l-co" class="fi" onchange="onCoChange()"><option value="">Loading...</option></select></div>
+        <div class="fg"><label class="fl">Your Name</label>
+          <select id="l-sm" class="fi" onchange="onSmChange()"><option value="">Select company first</option></select></div>
+        <div class="fg"><label class="fl">Today's Beat</label>
+          <select id="l-beat" class="fi"><option value="">Select name first</option></select></div>
+        <div class="fg"><label class="fl">PIN</label>
+          <input type="password" id="l-pin" class="fi" placeholder="Your PIN" maxlength="6" inputmode="numeric"></div>
+        <button class="btn bp bfull mt2" onclick="doSmLogin()">Login →</button>
+      </div>
+      <!-- Operator -->
+      <div id="lf-op" style="display:none">
+        <div class="fg"><label class="fl">Operator Password</label>
+          <input type="password" id="l-oppw" class="fi" placeholder="Operator password"></div>
+        <button class="btn bp bfull mt2" onclick="doOpLogin()">Login as Operator →</button>
+        <p style="font-size:11px;color:var(--tx3);margin-top:10px;text-align:center">Operators enter invoices & evening corrections</p>
+      </div>
+      <!-- Admin -->
+      <div id="lf-ad" style="display:none">
+        <div class="fg"><label class="fl">Admin Password</label>
+          <input type="password" id="l-adpw" class="fi" placeholder="Admin password"></div>
+        <button class="btn bp bfull mt2" onclick="doAdLogin()">Login as Admin →</button>
+      </div>
+      <p style="text-align:center;font-size:10px;color:var(--tx3);margin-top:16px">Admin/Operator: <strong>admin123</strong> · Salesman PIN: <strong>1234</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SALESMAN SCREEN ══ -->
+<div id="sc-sm" class="scr">
+  <div class="topbar no-print">
+    <div class="tbl">
+      <div class="tbt" id="sm-co"></div>
+      <div class="tbs" id="sm-beat-sub"></div>
+    </div>
+    <div class="tbr">
+      <button class="btn by bsm" onclick="showSmSummary()">Summary</button>
+      <button class="btn bsm" onclick="doLogout()">Out</button>
+    </div>
+  </div>
+  <div class="tabbar no-print">
+    <div class="tbi on" id="st-today" onclick="smTab('today')">⭐ Issued Today</div>
+    <div class="tbi" id="st-all" onclick="smTab('all')">All Pending</div>
+    <div class="tbi" id="st-done" onclick="smTab('done')">Collected</div>
+  </div>
+  <div class="scroll" id="sm-list"></div>
+</div>
+
+<!-- ══ OPERATOR SCREEN ══ -->
+<div id="sc-op" class="scr">
+  <div class="topbar no-print">
+    <div class="tbl"><div class="tbt">Invoice Entry</div><div class="tbs">Operator Panel</div></div>
+    <div class="tbr"><button class="btn bsm" onclick="doLogout()">Logout</button></div>
+  </div>
+  <div class="tabbar no-print">
+    <div class="tbi on" id="ot-entry" onclick="opTab('entry')">Add / Update Invoice</div>
+    <div class="tbi" id="ot-evening" onclick="opTab('evening')">Evening Entry</div>
+    <div class="tbi" id="ot-list" onclick="opTab('list')">Invoice List</div>
+  </div>
+  <div class="scroll" id="op-content"></div>
+</div>
+
+<!-- ══ ADMIN SCREEN ══ -->
+<div id="sc-ad" class="scr">
+  <div class="topbar no-print">
+    <div class="tbl"><div class="tbt">Admin</div><div class="tbs" id="ad-date"></div></div>
+    <div class="tbr">
+      <button class="btn by bsm no-print" onclick="printAll()">🖨 Print All</button>
+      <button class="btn bsm" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+  <div class="adm-wrap">
+    <div class="adm-nav no-print">
+      <div class="anav on" onclick="adTab('dash')" id="at-dash">Dashboard</div>
+      <div class="anav" onclick="adTab('morning')" id="at-morning">Morning Sheets</div>
+      <div class="anav" onclick="adTab('issue')" id="at-issue">Issue Beats</div>
+      <div class="anav" onclick="adTab('colls')" id="at-colls">Collections</div>
+      <div class="anav" onclick="adTab('pending')" id="at-pending">Pending</div>
+      <div class="anav" onclick="adTab('reports')" id="at-reports">Reports</div>
+      <div class="anav" onclick="adTab('masters')" id="at-masters">Masters</div>
+    </div>
+    <div class="acontent" id="ad-content"></div>
+  </div>
+</div>
+
+<!-- Print area (hidden on screen, shown on print) -->
+<div id="print-area"></div>
+
+<!-- ══ OVERLAYS ══ -->
+<!-- Collect -->
+<div class="overlay" id="ov-coll">
+  <div class="bsheet">
+    <div class="bsh-handle"></div>
+    <div class="bsh-title">Record Collection</div>
+    <div class="inv-box" id="coll-box"></div>
+    <div class="fg"><label class="fl">Amount Collected (₹)</label>
+      <input type="number" id="coll-amt" class="fi" placeholder="0.00" inputmode="decimal"></div>
+    <div class="fg"><label class="fl">Mode of Payment</label>
+      <select id="coll-mode" class="fi" onchange="onModeChange()">
+        <option value="">Select...</option>
+        <option>Cash</option><option>Cheque</option><option>UPI</option>
+        <option>NEFT</option><option>RTGS</option><option>IMPS</option>
+      </select></div>
+    <div class="fg" id="ref-fg" style="display:none"><label class="fl">Reference / Cheque No.</label>
+      <input type="text" id="coll-ref" class="fi" placeholder="UTR / Cheque number"></div>
+    <div class="fg"><label class="fl">Remarks (optional)</label>
+      <input type="text" id="coll-rmk" class="fi" placeholder="Any note"></div>
+    <div class="g2 mt3">
+      <button class="btn bfull" onclick="closeOv('ov-coll')">Cancel</button>
+      <button class="btn bp bfull" onclick="submitColl(false)">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Salesman Summary -->
+<div class="overlay" id="ov-summ">
+  <div class="bsheet" style="max-height:88vh">
+    <div class="bsh-handle"></div>
+    <div class="flex jb ac mb3">
+      <div class="bsh-title" style="margin:0;border:none;padding:0">Day Summary</div>
+      <button class="btn bsm" onclick="closeOv('ov-summ')">Close</button>
+    </div>
+    <div id="summ-body"></div>
+  </div>
+</div>
+
+<!-- Master Form -->
+<div class="overlay" id="ov-mast">
+  <div class="bsheet">
+    <div class="bsh-handle"></div>
+    <div class="bsh-title" id="mast-title">Add Item</div>
+    <div id="mast-form"></div>
+    <div class="g2 mt3">
+      <button class="btn bfull" onclick="closeOv('ov-mast')">Cancel</button>
+      <button class="btn bp bfull" onclick="submitMaster()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div id="spin"><div class="ring"></div><div style="font-size:12px;color:var(--tx2)">Loading...</div></div>
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════
+//  CONFIG — paste your Web App URL here
+// ═══════════════════════════════════════
+const API = "https://script.google.com/macros/s/AKfycbz_-VnwhPID1x9A2pL4fqlfLuSrb_g4p2QqRKxUMZMCy-XohF3z7TEmwNsA9Kfp-zds/exec";
+
+// ═══════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════
+let S = {
+  role: null, salesman: null, company: null, beat: null,
+  masters: null, invoices: [], curInv: null,
+  mastType: null, mastId: null,
+  today: new Date().toISOString().split('T')[0],
+  dayName: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][new Date().getDay()]
+};
+
+// ═══════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════
+const $ = id => document.getElementById(id);
+function fmt(n){ return (n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtD(d){ if(!d)return''; const p=d.split('-'); return p.length===3?`${p[2]}-${p[1]}-${p[0]}`:d; }
+function ageBadge(d){ if(d<=30)return`<span class="badge bgg">${d}d</span>`;if(d<=60)return`<span class="badge bga">${d}d</span>`;return`<span class="badge bgr">${d}d</span>`; }
+function modeBadge(m){ const c={Cash:'bgg',Cheque:'bgy',UPI:'bgb',NEFT:'bgb',RTGS:'bgp',IMPS:'bgb'}[m]||'bggr'; return`<span class="badge ${c}">${m}</span>`; }
+function compTag(c){ const m=S.masters?.companies.find(x=>x.name===c); const sh=m?m.short:c||''; const isG=(sh||'').toLowerCase().includes('g-five')||(c||'').toLowerCase().includes('g-five'); return`<span class="tag ${isG?'tagy':'tagb'}">${sh}</span>`; }
+function showScr(id){ document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); }
+function spin(v){ $('spin').classList.toggle('on',v); }
+function toast(msg,err=false){ const t=$('toast');t.textContent=msg;t.className='show'+(err?' err':'');setTimeout(()=>t.className='',3000); }
+function openOv(id){ $(id).classList.add('on'); }
+function closeOv(id){ $(id).classList.remove('on'); }
+function todayFormatted(){ return new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'}); }
+
+async function api(action, body={}){
+  spin(true);
+  try{
+    const r = await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...body})});
+    const d = await r.json();
+    if(!d.ok) throw new Error(d.error||'Unknown error');
+    return d;
+  }catch(e){ toast(e.message,true); throw e; }
+  finally{ spin(false); }
+}
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+async function init(){
+  try{
+    const d = await api('getMasters');
+    S.masters = d;
+    fillCompanyDrop();
+  }catch(e){
+    $('l-co').innerHTML='<option>Setup API URL first</option>';
+  }
+}
+
+function fillCompanyDrop(){
+  const s=$('l-co'); s.innerHTML='<option value="">Select Company...</option>';
+  (S.masters?.companies||[]).forEach(c=>s.innerHTML+=`<option value="${c.name}">${c.name}</option>`);
+}
+function onCoChange(){
+  const co=$('l-co').value, s=$('l-sm');
+  s.innerHTML='<option value="">Select Salesman...</option>';
+  $('l-beat').innerHTML='<option value="">Select name first</option>';
+  if(!co||!S.masters)return;
+  S.masters.salesmen.filter(x=>x.company===co).forEach(x=>s.innerHTML+=`<option value="${x.name}">${x.name}</option>`);
+  s.onchange=onSmChange;
+}
+function onSmChange(){
+  const sm=$('l-sm').value, b=$('l-beat');
+  b.innerHTML='<option value="">Select Beat...</option>';
+  if(!sm||!S.masters)return;
+  S.masters.beats.filter(x=>x.salesman===sm).forEach(x=>b.innerHTML+=`<option value="${x.name}">${x.name} (${x.day})</option>`);
+}
+function setLTab(t){
+  ['sm','op','ad'].forEach(x=>{ $(`lt-${x}`)?.classList.toggle('on',x===t); $(`lf-${x}`).style.display=x===t?'':'none'; });
+}
+
+// ═══════════════════════════════════════
+//  LOGIN
+// ═══════════════════════════════════════
+async function doSmLogin(){
+  const co=$('l-co').value, sm=$('l-sm').value, beat=$('l-beat').value, pin=$('l-pin').value;
+  if(!co||!sm||!beat||!pin){toast('Fill all fields',true);return;}
+  try{ await api('login',{company:co,salesman:sm,pin}); S.role='salesman';S.salesman=sm;S.company=co;S.beat=beat; initSmScreen(); }catch(e){}
+}
+async function doOpLogin(){
+  const pw=$('l-oppw').value; if(!pw){toast('Enter password',true);return;}
+  try{ await api('adminLogin',{password:pw}); S.role='operator'; initOpScreen(); }catch(e){}
+}
+async function doAdLogin(){
+  const pw=$('l-adpw').value; if(!pw){toast('Enter password',true);return;}
+  try{ await api('adminLogin',{password:pw}); S.role='admin'; initAdScreen(); }catch(e){}
+}
+function doLogout(){
+  S={...S,role:null,salesman:null,company:null,beat:null,invoices:[]};
+  showScr('sc-login'); $('l-pin').value=''; $('l-adpw').value=''; $('l-oppw').value='';
+}
+
+// ═══════════════════════════════════════
+//  SALESMAN SCREEN
+// ═══════════════════════════════════════
+function initSmScreen(){
+  $('sm-co').textContent=S.company; $('sm-beat-sub').textContent=S.beat+' Beat · '+todayFormatted();
+  showScr('sc-sm'); smTab('today');
+}
+let SM_TAB='today';
+function smTab(t){
+  SM_TAB=t; ['today','all','done'].forEach(x=>$(`st-${x}`).classList.toggle('on',x===t));
+  loadSmInvoices();
+}
+async function loadSmInvoices(){
+  try{
+    const d=await api('getInvoices',{salesman:S.salesman,company:S.company,beat:SM_TAB==='all'?null:S.beat});
+    S.invoices=d.invoices||[]; renderSmInvoices();
+  }catch(e){}
+}
+function renderSmInvoices(){
+  const el=$('sm-list'); let invs=[...S.invoices];
+  if(SM_TAB==='today') invs=invs.filter(i=>i.issuedToday);
+  if(SM_TAB==='done')  invs=invs.filter(i=>i.todayCollected>0);
+  if(!invs.length){
+    el.innerHTML=`<div class="empty"><div class="empty-ico">${SM_TAB==='today'?'📋':'✅'}</div>
+    <p>${SM_TAB==='today'?'No beats issued yet today.<br>Ask admin to issue your beat.':SM_TAB==='done'?'No collections recorded today yet':'All caught up!'}</p></div>`;
+    return;
+  }
+  el.innerHTML=invs.map(inv=>`
+    <div class="icard ${inv.issuedToday?'issued':''}">
+      ${inv.issuedToday?'<div class="issued-lbl">⭐ Issued Today</div>':''}
+      <div class="itop">
+        <div><span class="ino">${inv.invNo}</span>
+          <div class="icust">${inv.customer}</div>
+          <div class="imeta">${fmtD(inv.invDate)} · ${inv.beat} · ${ageBadge(inv.ageing)}</div></div>
+        <div class="ibal">
+          <div class="ibal-v">₹${fmt(inv.balance)}</div>
+          <div class="ibal-l">balance due</div></div>
+      </div>
+      <div class="iamts">
+        <div class="ab"><div class="av">₹${fmt(inv.billAmt)}</div><div class="al">Bill</div></div>
+        <div class="ab"><div class="av" style="color:var(--W)">₹${fmt(inv.cnAmt)}</div><div class="al">CN</div></div>
+        <div class="ab"><div class="av" style="color:var(--G)">₹${fmt(inv.prevPaid)}</div><div class="al">Prev Paid</div></div>
+      </div>
+      ${inv.todayCollected>0?`<div class="tcoll">✓ ₹${fmt(inv.todayCollected)} collected today</div>`:''}
+      <button class="btn bp bfull bsm no-print" onclick='openColl(${JSON.stringify(inv)},false)'>+ Collect Payment</button>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════
+//  COLLECT PAYMENT
+// ═══════════════════════════════════════
+function openColl(inv, isOffice=false){
+  S.curInv=inv; S.collIsOffice=isOffice;
+  $('coll-box').innerHTML=`
+    <div class="flex jb ac mb2"><strong>${inv.invNo}</strong>
+    <span style="font-family:var(--mono);font-weight:700;color:var(--P)">₹${fmt(inv.balance)} due</span></div>
+    <div style="font-size:12px;color:var(--Pd)">${inv.customer} · ${inv.beat}</div>
+    <div style="font-size:11px;color:var(--tx2);margin-top:3px">Bill:₹${fmt(inv.billAmt)} | CN:₹${fmt(inv.cnAmt)} | Paid:₹${fmt(inv.prevPaid)}</div>
+    ${isOffice?'<div style="background:var(--Wl);color:var(--W);padding:4px 8px;border-radius:6px;font-size:11px;font-weight:600;margin-top:6px">⚠ Office Entry — will be marked accordingly</div>':''}`;
+  $('coll-amt').value=inv.balance.toFixed(2);
+  $('coll-mode').value=''; $('coll-ref').value=''; $('coll-rmk').value='';
+  $('ref-fg').style.display='none';
+  openOv('ov-coll');
+}
+function onModeChange(){ $('ref-fg').style.display=['Cheque','NEFT','RTGS','IMPS'].includes($('coll-mode').value)?'':'none'; }
+async function submitColl(isOffice){
+  const inv=S.curInv, amount=parseFloat($('coll-amt').value)||0, mode=$('coll-mode').value;
+  const ref=$('coll-ref').value, rmk=$('coll-rmk').value;
+  if(!amount||!mode){toast('Enter amount and mode',true);return;}
+  if(amount>inv.balance+0.01){toast('Amount exceeds balance',true);return;}
+  try{
+    await api('saveCollection',{invNo:inv.invNo,customer:inv.customer,salesman:inv.salesman||S.salesman,
+      beat:inv.beat||S.beat,company:inv.company||S.company,amount,mode,ref,remarks:rmk,entryBy:S.collIsOffice?'Office':'Salesman'});
+    closeOv('ov-coll'); toast(`₹${fmt(amount)} saved via ${mode}`);
+    if(S.role==='salesman') loadSmInvoices();
+    else opTab('evening');
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════
+//  SALESMAN SUMMARY
+// ═══════════════════════════════════════
+async function showSmSummary(){
+  try{
+    const d=await api('getCollections',{dateFrom:S.today,dateTo:S.today,salesman:S.salesman});
+    const colls=d.rows||[], total=d.total||0;
+    const byMode={};colls.forEach(c=>{byMode[c.mode]=(byMode[c.mode]||0)+c.amount});
+    $('summ-body').innerHTML=`
+      <div style="background:linear-gradient(135deg,var(--P),var(--Bm));padding:18px;border-radius:var(--rl);text-align:center;margin-bottom:14px">
+        <div style="font-size:28px;font-weight:700;color:#fff;font-family:var(--mono)">₹${fmt(total)}</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.8);margin-top:3px">Total Collected · ${todayFormatted()}</div>
+      </div>
+      <div class="card mb3"><h3>Mode Breakup</h3>
+        ${Object.entries(byMode).map(([m,a])=>`<div class="rowitem">${modeBadge(m)}<span style="font-family:var(--mono);font-weight:700">₹${fmt(a)}</span></div>`).join('')||'<p style="color:var(--tx3);font-size:13px">No collections yet</p>'}
+      </div>
+      <div class="card"><h3>Invoice-wise</h3>
+        ${colls.map(c=>`<div class="rowitem">
+          <div><div class="mono" style="color:var(--P)">${c.invNo}</div>
+          <div style="font-size:12px;color:var(--tx2)">${c.customer} ${c.entryBy==='Office'?'<span class="badge bga">Office</span>':''}</div></div>
+          <div style="text-align:right"><div class="mono" style="color:var(--G);font-weight:700">₹${fmt(c.amount)}</div>${modeBadge(c.mode)}</div>
+        </div>`).join('')||'<p style="color:var(--tx3);font-size:13px">No entries</p>'}
+      </div>`;
+    openOv('ov-summ');
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════
+//  OPERATOR SCREEN
+// ═══════════════════════════════════════
+function initOpScreen(){ showScr('sc-op'); opTab('entry'); }
+function opTab(t){
+  ['entry','evening','list'].forEach(x=>$(`ot-${x}`).classList.toggle('on',x===t));
+  const el=$('op-content');
+  if(t==='entry')   renderOpEntry(el);
+  if(t==='evening') renderOpEvening(el);
+  if(t==='list')    renderOpList(el);
+}
+
+function renderOpEntry(el){
+  const m=S.masters;
+  el.innerHTML=`
+    <div class="stitle">Add / Update Invoice</div>
+    <div class="hint">
+      Enter one invoice at a time. If the invoice number already exists it will be <strong>updated</strong>, not duplicated.<br>
+      Leave CN or Prev Paid as 0 if not applicable. Balance auto-calculates.
+    </div>
+    <div class="g2">
+      <div class="fg"><label class="fl">Invoice No.</label><input id="oi-no" class="fi" placeholder="e.g. GF-1001"></div>
+      <div class="fg"><label class="fl">Invoice Date</label><input type="date" id="oi-dt" class="fi" value="${S.today}"></div>
+    </div>
+    <div class="fg"><label class="fl">Customer Name</label><input id="oi-cust" class="fi" placeholder="Party / shop name"></div>
+    <div class="fg"><label class="fl">Company</label>
+      <select id="oi-co" class="fi"><option value="">Select...</option>
+        ${(m?.companies||[]).map(c=>`<option>${c.name}</option>`).join('')}</select></div>
+    <div class="fg"><label class="fl">Salesman</label>
+      <select id="oi-sm" class="fi" onchange="opFillBeats()"><option value="">Select...</option>
+        ${(m?.salesmen||[]).map(s=>`<option>${s.name}</option>`).join('')}</select></div>
+    <div class="fg"><label class="fl">Beat</label>
+      <select id="oi-beat" class="fi"><option value="">Select salesman first</option></select></div>
+    <div class="g2">
+      <div class="fg"><label class="fl">Bill Amount (₹)</label><input type="number" id="oi-bill" class="fi" placeholder="0" oninput="calcBal()"></div>
+      <div class="fg"><label class="fl">CN Amount (₹)</label><input type="number" id="oi-cn" class="fi" placeholder="0" oninput="calcBal()"></div>
+    </div>
+    <div class="g2">
+      <div class="fg"><label class="fl">Previously Paid (₹)</label><input type="number" id="oi-paid" class="fi" placeholder="0" oninput="calcBal()"></div>
+      <div class="fg"><label class="fl">Balance (auto)</label><input id="oi-bal" class="fi" readonly style="background:var(--sf2);color:var(--P);font-weight:700"></div>
+    </div>
+    <button class="btn bp bfull mt2" onclick="submitInvoice()">Save Invoice</button>
+    <p id="oi-status" style="text-align:center;font-size:12px;color:var(--P);font-weight:600;min-height:18px;margin-top:10px"></p>`;
+}
+function opFillBeats(){
+  const sm=$('oi-sm').value, b=$('oi-beat');
+  b.innerHTML='<option value="">Select Beat...</option>';
+  (S.masters?.beats||[]).filter(x=>x.salesman===sm).forEach(x=>b.innerHTML+=`<option>${x.name}</option>`);
+}
+function calcBal(){
+  const bill=parseFloat($('oi-bill')?.value)||0,cn=parseFloat($('oi-cn')?.value)||0,paid=parseFloat($('oi-paid')?.value)||0;
+  if($('oi-bal'))$('oi-bal').value=(bill-cn-paid).toFixed(2);
+}
+async function submitInvoice(){
+  const no=$('oi-no').value.trim(),dt=$('oi-dt').value,cust=$('oi-cust').value.trim(),
+    co=$('oi-co').value,sm=$('oi-sm').value,beat=$('oi-beat').value,
+    bill=$('oi-bill').value,cn=$('oi-cn').value,paid=$('oi-paid').value;
+  if(!no||!cust||!co||!sm||!beat||!bill){toast('Fill all required fields',true);return;}
+  try{
+    const d=await api('upsertInvoice',{invNo:no,invDate:dt,customer:cust,company:co,salesman:sm,beat,billAmt:bill,cnAmt:cn||0,prevPaid:paid||0});
+    $('oi-status').textContent=`✓ Invoice ${d.invNo} ${d.action} successfully`;
+    ['oi-no','oi-cust','oi-bill','oi-cn','oi-paid','oi-bal'].forEach(id=>{const e=$(id);if(e)e.value='';});
+    toast(`Invoice ${d.action}`);
+  }catch(e){}
+}
+
+async function renderOpEvening(el){
+  el.innerHTML='<div class="empty"><div class="ring" style="margin:0 auto"></div></div>';
+  try{
+    const d=await api('getInvoices',{salesman:'',company:'',beat:''});
+    const invs=(d.invoices||[]);
+    el.innerHTML=`
+      <div class="stitle">Evening Office Entry</div>
+      <div class="hint">For invoices where salesman forgot to record on phone. These will be marked as <strong>Office Entry</strong> in reports.</div>
+      <div class="fg"><label class="fl">Search Invoice No. or Customer</label>
+        <input id="ev-search" class="fi" placeholder="Type to filter..." oninput="filterEvening()"></div>
+      <div id="ev-list"></div>`;
+    window._evInvs = invs;
+    filterEvening();
+  }catch(e){}
+}
+function filterEvening(){
+  const q=($('ev-search')?.value||'').toLowerCase();
+  const invs=(window._evInvs||[]).filter(i=>!q||i.invNo.toLowerCase().includes(q)||i.customer.toLowerCase().includes(q));
+  const el=$('ev-list');
+  if(!invs.length){el.innerHTML='<div class="empty"><p>No invoices found</p></div>';return;}
+  el.innerHTML=invs.slice(0,30).map(inv=>`
+    <div class="icard" style="margin-bottom:8px">
+      <div class="itop">
+        <div><span class="ino">${inv.invNo}</span>
+          <div class="icust" style="font-size:13px">${inv.customer}</div>
+          <div class="imeta">${inv.salesman} · ${inv.beat}</div></div>
+        <div class="ibal"><div class="ibal-v" style="font-size:16px">₹${fmt(inv.balance)}</div><div class="ibal-l">due</div></div>
+      </div>
+      <button class="btn by bfull bsm no-print" onclick='openColl(${JSON.stringify(inv)},true)'>+ Add Office Entry</button>
+    </div>`).join('');
+}
+
+async function renderOpList(el){
+  el.innerHTML='<div class="empty"><div class="ring" style="margin:0 auto"></div></div>';
+  try{
+    const d=await api('getPending',{});
+    const rows=d.rows||[];
+    el.innerHTML=`<div class="stitle">Active Invoices (${rows.length})</div>
+      <div class="tbar">
+        <div><div style="font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px">Total Pending</div>
+        <div style="font-size:20px;font-weight:700;color:var(--R);font-family:var(--mono)">₹${fmt(d.total)}</div></div>
+        <span class="badge bgr">${rows.length} invoices</span></div>
+      <div class="twrap"><table>
+        <thead><tr><th>Inv No</th><th>Customer</th><th>Co.</th><th>Salesman</th><th>Beat</th><th>Balance</th><th>Age</th></tr></thead>
+        <tbody>${rows.map(r=>`<tr>
+          <td class="mono">${r.invNo}</td><td style="font-weight:500">${r.customer}</td>
+          <td>${compTag(r.company)}</td><td style="font-size:12px">${r.salesman}</td>
+          <td style="font-size:11px;color:var(--tx2)">${r.beat}</td>
+          <td class="mono" style="color:var(--R);font-weight:700">₹${fmt(r.balance)}</td>
+          <td>${ageBadge(r.ageing)}</td></tr>`).join('')}
+        </tbody></table></div>`;
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════
+//  ADMIN SCREEN
+// ═══════════════════════════════════════
+function initAdScreen(){ $('ad-date').textContent=todayFormatted(); showScr('sc-ad'); adTab('dash'); }
+function adTab(t){
+  document.querySelectorAll('.anav').forEach(x=>x.classList.remove('on'));
+  $(`at-${t}`)?.classList.add('on');
+  const el=$('ad-content');
+  if(t==='dash')     renderDash(el);
+  if(t==='morning')  renderMorning(el);
+  if(t==='issue')    renderIssue(el);
+  if(t==='colls')    renderColls(el);
+  if(t==='pending')  renderPending(el);
+  if(t==='reports')  renderReports(el);
+  if(t==='masters')  renderMasters(el);
+}
+
+// ── DASHBOARD ──
+async function renderDash(el){
+  el.innerHTML='<div class="empty"><div class="ring" style="margin:0 auto"></div></div>';
+  try{
+    const d=await api('getDashboard',{date:S.today});
+    el.innerHTML=`
+      <div class="stitle">Dashboard · Today</div>
+      <div class="sgrid">
+        <div class="sc sp"><div class="sci">💰</div><div class="scv">₹${fmt(d.totalCollected)}</div><div class="scl">Collected Today</div></div>
+        <div class="sc sr"><div class="sci">⏳</div><div class="scv">₹${fmt(d.totalPending)}</div><div class="scl">Total Pending</div></div>
+        <div class="sc sb"><div class="sci">👥</div><div class="scv">${d.activeSalesmen}</div><div class="scl">Active Salesmen</div></div>
+        <div class="sc sy"><div class="sci">🧾</div><div class="scv">${d.openInvoices}</div><div class="scl">Open Invoices</div></div>
+      </div>
+      <div class="card mb3"><h3>Company-wise (Today)</h3>
+        ${Object.entries(d.byCompany||{}).map(([co,a])=>`<div class="rowitem">${compTag(co)}<span style="font-family:var(--mono);font-weight:700;color:var(--P)">₹${fmt(a)}</span></div>`).join('')||'<p style="color:var(--tx3);font-size:13px">No data</p>'}
+      </div>
+      <div class="card mb3"><h3>Mode-wise (Today)</h3>
+        ${Object.entries(d.byMode||{}).map(([m,a])=>`<div class="rowitem">${modeBadge(m)}<span style="font-family:var(--mono);font-weight:700">₹${fmt(a)}</span></div>`).join('')||'<p style="color:var(--tx3);font-size:13px">No data</p>'}
+      </div>
+      <div class="card"><h3>Salesman-wise (Today)</h3>
+        ${Object.entries(d.bySalesman||{}).map(([sm,v])=>`<div class="rowitem">
+          <div><div style="font-weight:600;font-size:13px">${sm}</div>
+          <div style="font-size:11px;color:var(--tx2)">${v.company||''} · ${v.beat||''}</div></div>
+          <div style="text-align:right">
+            <div style="font-family:var(--mono);font-weight:700;color:var(--P)">₹${fmt(v.total)}</div>
+            <div style="font-size:10px;color:var(--tx2)">C:₹${fmt(v.cash)} Ch:₹${fmt(v.cheque)} D:₹${fmt(v.digital)}</div>
+          </div></div>`).join('')||'<p style="color:var(--tx3);font-size:13px">No collections today</p>'}
+      </div>`;
+  }catch(e){}
+}
+
+// ── MORNING SHEETS ──
+async function renderMorning(el){
+  el.innerHTML='<div class="empty"><div class="ring" style="margin:0 auto"></div></div>';
+  try{
+    const d=await api('getMorningData',{dayName:S.dayName,date:S.today});
+    const sms=d.salesmen||[];
+    if(!sms.length){
+      el.innerHTML=`<div class="stitle">Morning Sheets · ${d.dayName}</div>
+        <div class="empty"><div class="empty-ico">📋</div><p>No beats scheduled for ${d.dayName}<br>or no active invoices found.</p></div>`;
+      return;
+    }
+    el.innerHTML=`
+      <div class="stitle">Morning Sheets · ${d.dayName} · ${sms.length} Salesman(s)</div>
+      <div class="hint">Click <strong>Print All</strong> to print all ${sms.length} sheets in one go (A4 landscape, large font).<br>
+        Or print individual salesmen below.</div>
+      <div class="flex" style="gap:8px;margin-bottom:14px;flex-wrap:wrap">
+        <button class="btn bp" onclick="printAll()">🖨 Print All ${sms.length} Sheets</button>
+      </div>
+      ${sms.map(sm=>`
+        <div class="card mb3">
+          <div class="flex jb ac mb2">
+            <div>
+              <div style="font-weight:700;font-size:14px">${sm.salesman}</div>
+              <div style="font-size:12px;color:var(--tx2)">${sm.company} · Beats: ${sm.beats.join(', ')}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-family:var(--mono);font-weight:700;color:var(--R)">₹${fmt(sm.totalBalance)}</div>
+              <div style="font-size:11px;color:var(--tx2)">${sm.invoices.length} invoices</div>
+              <button class="btn bp bsm no-print mt2" onclick="printOne('${sm.salesman}')">🖨 Print</button>
+            </div>
+          </div>
+          <div class="twrap"><table>
+            <thead><tr><th>Inv No</th><th>Date</th><th>Customer</th><th>Beat</th><th>Bill</th><th>CN</th><th>Paid</th><th style="color:#F4C842">Balance ▼</th><th>Age</th></tr></thead>
+            <tbody>${sm.invoices.map(i=>`<tr ${i.issuedToday?'style="background:#FFFBEA"':''}>
+              <td class="mono">${i.invNo}</td><td style="font-size:11px">${fmtD(i.invDate)}</td>
+              <td style="font-weight:600">${i.customer}</td>
+              <td style="font-size:11px;color:var(--tx2)">${i.beat}</td>
+              <td class="mono">₹${fmt(i.billAmt)}</td><td class="mono" style="color:var(--W)">₹${fmt(i.cnAmt)}</td>
+              <td class="mono" style="color:var(--G)">₹${fmt(i.prevPaid)}</td>
+              <td class="mono" style="color:var(--R);font-weight:700">₹${fmt(i.balance)}</td>
+              <td>${ageBadge(i.ageing)}</td></tr>`).join('')}
+            </tbody></table></div>
+        </div>`).join('')}`;
+    // Store for print
+    window._morningData = d;
+  }catch(e){}
+}
+
+function buildPrintHTML(data, filterSalesman=null){
+  const sms = filterSalesman
+    ? data.salesmen.filter(s=>s.salesman===filterSalesman)
+    : data.salesmen;
+  return sms.map(sm=>{
+    const total = sm.invoices.reduce((s,i)=>s+i.balance,0);
+    const rows = sm.invoices.map(i=>{
+      const ageClass = i.ageing>60?'aged-hi':i.ageing>30?'aged-med':'';
+      return `<tr class="${i.issuedToday?'issued-row':''}">
+        <td class="mono">${i.invNo}</td>
+        <td>${fmtD(i.invDate)}</td>
+        <td class="bold">${i.customer}</td>
+        <td>${i.beat}</td>
+        <td class="right mono">₹${fmt(i.billAmt)}</td>
+        <td class="right mono">₹${fmt(i.cnAmt)}</td>
+        <td class="right mono">₹${fmt(i.prevPaid)}</td>
+        <td class="right mono bold">₹${fmt(i.balance)}</td>
+        <td class="${ageClass} right">${i.ageing}d</td>
+        <td class="coll-col"></td>
+        <td class="coll-col"></td>
+        <td class="coll-col"></td>
+      </tr>`;
+    }).join('');
+    return `<div class="print-page">
+      <div class="ph">
+        <div class="ph-left">
+          <h2>${sm.salesman}</h2>
+          <p>${sm.company}</p>
+          <p>Beats: ${sm.beats.join(' | ')}</p>
+        </div>
+        <div class="ph-right">
+          <strong>CollectPro — Collection Sheet</strong>
+          Date: ${fmtD(data.date)} · ${data.dayName}<br>
+          Invoices: ${sm.invoices.length} · Total Balance: ₹${fmt(total)}
+        </div>
+      </div>
+      <table class="ptable">
+        <thead><tr>
+          <th>Invoice No</th><th>Date</th><th>Customer</th><th>Beat</th>
+          <th>Bill Amt</th><th>CN</th><th>Prev Paid</th><th>Balance ₹</th><th>Age</th>
+          <th>Collected ₹</th><th>Mode</th><th>Remarks</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="psumm">
+        <span>Total Invoices: ${sm.invoices.length}</span>
+        <span>Total Balance: ₹${fmt(total)}</span>
+        <span>Cash: ___________</span>
+        <span>Cheque: ___________</span>
+        <span>UPI/Digital: ___________</span>
+        <span>Total Collected: ___________</span>
+      </div>
+      <div class="pfoot">
+        <span>Salesman Signature: ___________________________</span>
+        <span>Office Signature: ___________________________</span>
+        <span>Printed: ${new Date().toLocaleString('en-IN')}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function printAll(){
+  if(!window._morningData){
+    try{ const d=await api('getMorningData',{dayName:S.dayName,date:S.today}); window._morningData=d; }catch(e){return;}
+  }
+  $('print-area').innerHTML=buildPrintHTML(window._morningData);
+  window.print();
+}
+async function printOne(salesman){
+  if(!window._morningData){
+    try{ const d=await api('getMorningData',{dayName:S.dayName,date:S.today}); window._morningData=d; }catch(e){return;}
+  }
+  $('print-area').innerHTML=buildPrintHTML(window._morningData, salesman);
+  window.print();
+}
+
+// ── ISSUE BEATS ──
+async function renderIssue(el){
+  el.innerHTML='<div class="empty"><div class="ring" style="margin:0 auto"></div></div>';
+  try{
+    const [beats, issued] = await Promise.all([
+      api('getTodayBeats',{dayName:S.dayName}),
+      api('getDailyIssue',{date:S.today})
+    ]);
+    const issuedSet=new Set(issued.rows.map(r=>r.salesman+'|'+r.beat));
+    const bList=beats.beats||[];
+    el.innerHTML=`
+      <div class="stitle">Issue Beats · ${S.dayName}</div>
+      <div class="hint">Mark which salesman's beats have been physically handed invoices this morning. Salesmen will see these highlighted on their phone as <strong>⭐ Issued Today</strong>.</div>
+      ${issued.rows.length?`<div class="card mb3" style="border-color:var(--G);background:var(--Gl)">
+        <h3 style="color:var(--G)">Already Issued Today</h3>
+        ${issued.rows.map(r=>`<div style="font-size:12px;color:var(--G);padding:3px 0">✓ ${r.salesman} — ${r.beat} at ${r.time} by ${r.issuedBy}</div>`).join('')}
+      </div>`:''}
+      ${bList.length?bList.map(b=>{
+        const key=b.salesman+'|'+b.name, done=issuedSet.has(key);
+        return`<div class="bcard ${done?'done':''}">
+          <div>
+            <div style="font-weight:700;font-size:13px">${b.salesman}</div>
+            <div style="font-size:12px;color:var(--tx2)">${b.name} Beat</div>
+            <div style="margin-top:3px">${compTag(b.company)}</div>
+          </div>
+          ${done
+            ?`<div><span class="badge bgg">Issued ✓</span><br>
+               <button class="btn bsm br" style="margin-top:6px" onclick="unissueBeat('${b.salesman}','${b.name}','${b.company}')">Undo</button></div>`
+            :`<button class="btn bp bsm" onclick="issueBeat('${b.salesman}','${b.name}','${b.company}')">Issue Beat</button>`}
+        </div>`;
+      }).join(''):`<div class="empty"><p>No beats scheduled for ${S.dayName}</p></div>`}`;
+  }catch(e){}
+}
+async function issueBeat(sm,beat,co){
+  try{ await api('issueBeat',{salesman:sm,beat,company:co,issuedBy:'Admin'}); toast(`${sm} — ${beat} issued`); renderIssue($('ad-content')); }catch(e){}
+}
+async function unissueBeat(sm,beat,co){
+  try{ await api('unissueBeat',{salesman:sm,beat,company:co}); toast('Undone'); renderIssue($('ad-content')); }catch(e){}
+}
+
+// ── COLLECTIONS ──
+async function renderColls(el){
+  el.innerHTML=`
+    <div class="stitle">Today's Collections</div>
+    <div class="fbar"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div><label class="fl">Company</label>
+        <select id="cf-co" class="fi" onchange="applyCollFilt()"><option value="">All</option>
+          ${(S.masters?.companies||[]).map(c=>`<option>${c.name}</option>`).join('')}</select></div>
+      <div><label class="fl">Salesman</label>
+        <select id="cf-sm" class="fi" onchange="applyCollFilt()"><option value="">All</option>
+          ${(S.masters?.salesmen||[]).map(s=>`<option>${s.name}</option>`).join('')}</select></div>
+      <div><label class="fl">Mode</label>
+        <select id="cf-mode" class="fi" onchange="applyCollFilt()"><option value="">All</option>
+          ${['Cash','Cheque','UPI','NEFT','RTGS','IMPS'].map(m=>`<option>${m}</option>`).join('')}</select></div>
+      <div><label class="fl">Entry By</label>
+        <select id="cf-entry" class="fi" onchange="applyCollFilt()"><option value="">All</option><option>Salesman</option><option>Office</option></select></div>
+    </div></div>
+    <div id="coll-res"></div>`;
+  applyCollFilt();
+}
+async function applyCollFilt(){
+  const el=$('coll-res'); if(!el)return;
+  el.innerHTML='<div class="empty"><div class="ring" style="margin:0 auto"></div></div>';
+  try{
+    const d=await api('getCollections',{dateFrom:S.today,dateTo:S.today,
+      company:$('cf-co')?.value||'',salesman:$('cf-sm')?.value||'',mode:$('cf-mode')?.value||''});
+    let rows=d.rows||[];
+    const ef=$('cf-entry')?.value||'';
+    if(ef) rows=rows.filter(r=>r.entryBy===ef);
+    const total=rows.reduce((s,r)=>s+r.amount,0);
+    el.innerHTML=`
+      <div class="tbar">
+        <div><div style="font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px">Total</div>
+        <div style="font-size:22px;font-weight:700;color:var(--P);font-family:var(--mono)">₹${fmt(total)}</div></div>
+        <span class="badge bgp">${rows.length} entries</span></div>
+      <div class="twrap"><table>
+        <thead><tr><th>Inv No</th><th>Customer</th><th>Salesman</th><th>Beat</th><th>Co.</th><th>Amt</th><th>Mode</th><th>By</th><th>Ref</th></tr></thead>
+        <tbody>${rows.length?rows.map(r=>`<tr ${r.entryBy==='Office'?'style="background:#FFF8F0"':''}>
+          <td class="mono">${r.invNo}</td><td style="font-weight:500">${r.customer}</td>
+          <td style="font-size:12px">${r.salesman}</td><td style="font-size:11px;color:var(--tx2)">${r.beat}</td>
+          <td>${compTag(r.company)}</td>
+          <td class="mono" style="color:var(--G);font-weight:700">₹${fmt(r.amount)}</td>
+          <td>${modeBadge(r.mode)}</td>
+          <td><span class="badge ${r.entryBy==='Office'?'bga':'bgg'}">${r.entryBy||'Salesman'}</span></td>
+          <td style="font-size:11px;color:var(--tx2)">${r.ref||'-'}</td>
+        </tr>`).join(''):`<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--tx3)">No data</td></tr>`}
+        </tbody></table></div>`;
+  }catch(e){}
+}
+
+// ── PENDING ──
+async function renderPending(el){
+  el.innerHTML=`<div class="stitle">Pending Invoices</div>
+    <div class="fbar"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div><label class="fl">Company</label>
+        <select id="pf-co" class="fi" onchange="applyPendFilt()"><option value="">All</option>
+          ${(S.masters?.companies||[]).map(c=>`<option>${c.name}</option>`).join('')}</select></div>
+      <div><label class="fl">Salesman</label>
+        <select id="pf-sm" class="fi" onchange="applyPendFilt()"><option value="">All</option>
+          ${(S.masters?.salesmen||[]).map(s=>`<option>${s.name}</option>`).join('')}</select></div>
+      <div><label class="fl">Beat</label>
+        <select id="pf-beat" class="fi" onchange="applyPendFilt()"><option value="">All</option>
+          ${(S.masters?.beats||[]).map(b=>`<option>${b.name}</option>`).join('')}</select></div>
+      <div><label class="fl">Ageing</label>
+        <select id="pf-age" class="fi" onchange="applyPendFilt()"><option value="">All</option>
+          <option value="0-30">0–30 days</option><option value="31-60">31–60 days</option><option value="60+">60+ days</option></select></div>
+    </div></div>
+    <div id="pend-res"></div>`;
+  applyPendFilt();
+}
+async function applyPendFilt(){
+  const el=$('pend-res');if(!el)return;
+  el.innerHTML='<div class="empty"><div class="ring" style="margin:0 auto"></div></div>';
+  const ag=$('pf-age')?.value||'';
+  let mn=null,mx=null;
+  if(ag==='0-30'){mn=0;mx=30;}if(ag==='31-60'){mn=31;mx=60;}if(ag==='60+'){mn=61;}
+  try{
+    const d=await api('getPending',{company:$('pf-co')?.value||'',salesman:$('pf-sm')?.value||'',beat:$('pf-beat')?.value||'',ageMin:mn,ageMax:mx});
+    const rows=d.rows||[];
+    el.innerHTML=`<div class="tbar">
+      <div><div style="font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px">${rows.length} invoice(s)</div>
+      <div style="font-size:22px;font-weight:700;color:var(--R);font-family:var(--mono)">₹${fmt(d.total)}</div></div>
+      <span class="badge bgr">Pending</span></div>
+    <div class="twrap"><table>
+      <thead><tr><th>Inv No</th><th>Date</th><th>Customer</th><th>Co.</th><th>Salesman</th><th>Beat</th><th>Balance</th><th>Age</th></tr></thead>
+      <tbody>${rows.length?rows.map(r=>`<tr>
+        <td class="mono">${r.invNo}</td><td style="font-size:11px">${fmtD(r.invDate)}</td>
+        <td style="font-weight:600">${r.customer}</td><td>${compTag(r.company)}</td>
+        <td style="font-size:12px">${r.salesman}</td><td style="font-size:11px;color:var(--tx2)">${r.beat}</td>
+        <td class="mono" style="color:var(--R);font-weight:700">₹${fmt(r.balance)}</td>
+        <td>${ageBadge(r.ageing)}</td></tr>`).join(''):`<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--tx3)">No pending invoices</td></tr>`}
+      </tbody></table></div>`;
+  }catch(e){}
+}
+
+// ── REPORTS ──
+function renderReports(el){
+  el.innerHTML=`<div class="stitle">Reports</div>
+    <div class="fbar"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div><label class="fl">From Date</label><input type="date" id="rf-from" class="fi" value="${S.today}"></div>
+      <div><label class="fl">To Date</label><input type="date" id="rf-to" class="fi" value="${S.today}"></div>
+      <div><label class="fl">Company</label>
+        <select id="rf-co" class="fi"><option value="">All</option>
+          ${(S.masters?.companies||[]).map(c=>`<option>${c.name}</option>`).join('')}</select></div>
+      <div><label class="fl">Salesman</label>
+        <select id="rf-sm" class="fi"><option value="">All</option>
+          ${(S.masters?.salesmen||[]).map(s=>`<option>${s.name}</option>`).join('')}</select></div>
+    </div></div>
+    <button class="btn bp bfull mb3" onclick="runReport()">Generate Report</button>
+    <div id="rpt-res"></div>`;
+}
+async function runReport(){
+  const el=$('rpt-res');
+  el.innerHTML='<div class="empty"><div class="ring" style="margin:0 auto"></div></div>';
+  try{
+    const d=await api('getReport',{dateFrom:$('rf-from').value,dateTo:$('rf-to').value,company:$('rf-co').value,salesman:$('rf-sm').value});
+    const rows=d.rows||[],total=d.total||0;
+    const bMode={},bSm={},bCo={};
+    rows.forEach(r=>{bMode[r.mode]=(bMode[r.mode]||0)+r.amount;bSm[r.salesman]=(bSm[r.salesman]||0)+r.amount;bCo[r.company]=(bCo[r.company]||0)+r.amount;});
+    el.innerHTML=`
+      <div class="sgrid mb3">
+        <div class="sc sp"><div class="scv">₹${fmt(total)}</div><div class="scl">Total Collected</div></div>
+        <div class="sc sb"><div class="scv">${rows.length}</div><div class="scl">Transactions</div></div>
+      </div>
+      <div class="card mb3"><h3>Company-wise</h3>
+        ${Object.entries(bCo).map(([c,a])=>`<div class="rowitem">${compTag(c)}<span class="mono" style="font-weight:700;color:var(--P)">₹${fmt(a)}</span></div>`).join('')||'<p style="color:var(--tx3);font-size:13px">No data</p>'}
+      </div>
+      <div class="card mb3"><h3>Mode-wise</h3>
+        ${Object.entries(bMode).map(([m,a])=>`<div class="rowitem">${modeBadge(m)}<div style="text-align:right"><div class="mono" style="font-weight:700">₹${fmt(a)}</div><div style="font-size:10px;color:var(--tx3)">${total?((a/total)*100).toFixed(1):0}%</div></div></div>`).join('')||'<p style="color:var(--tx3);font-size:13px">No data</p>'}
+      </div>
+      <div class="card mb3"><h3>Salesman-wise</h3>
+        ${Object.entries(bSm).sort((a,b)=>b[1]-a[1]).map(([sm,a])=>`<div class="rowitem"><span style="font-size:13px;font-weight:500">${sm}</span><span class="mono" style="font-weight:700;color:var(--P)">₹${fmt(a)}</span></div>`).join('')||'<p style="color:var(--tx3);font-size:13px">No data</p>'}
+      </div>
+      <div class="card"><h3>All Transactions</h3>
+        <div class="twrap"><table>
+          <thead><tr><th>Date</th><th>Inv No</th><th>Customer</th><th>Salesman</th><th>Beat</th><th>Co.</th><th>Amt</th><th>Mode</th><th>By</th></tr></thead>
+          <tbody>${rows.map(r=>`<tr>
+            <td style="font-size:11px">${fmtD(r.date)}</td><td class="mono">${r.invNo}</td>
+            <td>${r.customer}</td><td style="font-size:12px">${r.salesman}</td>
+            <td style="font-size:11px;color:var(--tx2)">${r.beat}</td><td>${compTag(r.company)}</td>
+            <td class="mono" style="color:var(--G);font-weight:700">₹${fmt(r.amount)}</td>
+            <td>${modeBadge(r.mode)}</td>
+            <td><span class="badge ${r.entryBy==='Office'?'bga':'bgg'}">${r.entryBy||'Salesman'}</span></td>
+          </tr>`).join('')||`<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--tx3)">No data</td></tr>`}
+          </tbody></table></div>
+      </div>`;
+  }catch(e){}
+}
+
+// ── MASTERS ──
+async function renderMasters(el){
+  el.innerHTML='<div class="empty"><div class="ring" style="margin:0 auto"></div></div>';
+  try{
+    const d=await api('getMasters'); S.masters=d;
+    el.innerHTML=`
+      <div class="stitle">Master Management</div>
+      <div class="card mb3">
+        <div class="flex jb ac mb2"><h3>Companies (${d.companies.length})</h3><button class="btn bp bsm" onclick="openAddM('Company')">+ Add</button></div>
+        ${d.companies.map(c=>`<div class="rowitem"><div><div style="font-weight:600">${c.name}</div><div style="font-size:11px;color:var(--tx2)">${c.short||''}</div></div>
+          <div class="flex" style="gap:6px"><button class="btn bsm" onclick='editM("Company","${c.id}",${JSON.stringify(c)})'>Edit</button>
+          <button class="btn br bsm" onclick='delM("Company","${c.id}")'>Del</button></div></div>`).join('')}
+      </div>
+      <div class="card mb3">
+        <div class="flex jb ac mb2"><h3>Salesmen (${d.salesmen.length})</h3><button class="btn bp bsm" onclick="openAddM('Salesman')">+ Add</button></div>
+        ${d.salesmen.map(s=>`<div class="rowitem"><div><div style="font-weight:600">${s.name}</div>
+          <div style="font-size:11px;color:var(--tx2)">${s.company}</div></div>
+          <div class="flex" style="gap:6px"><button class="btn bsm" onclick='editM("Salesman","${s.id}",${JSON.stringify(s)})'>Edit</button>
+          <button class="btn br bsm" onclick='delM("Salesman","${s.id}")'>Del</button></div></div>`).join('')}
+      </div>
+      <div class="card">
+        <div class="flex jb ac mb2"><h3>Beats (${d.beats.length})</h3><button class="btn bp bsm" onclick="openAddM('Beat')">+ Add</button></div>
+        ${d.beats.map(b=>`<div class="rowitem"><div><div style="font-weight:600">${b.name}</div>
+          <div style="font-size:11px;color:var(--tx2)">${b.salesman} · ${b.day}</div></div>
+          <div class="flex" style="gap:6px"><button class="btn bsm" onclick='editM("Beat","${b.id}",${JSON.stringify(b)})'>Edit</button>
+          <button class="btn br bsm" onclick='delM("Beat","${b.id}")'>Del</button></div></div>`).join('')}
+      </div>`;
+  }catch(e){}
+}
+function openAddM(t){ S.mastType=t;S.mastId=null;$('mast-title').textContent='Add '+t;$('mast-form').innerHTML=mastForm(t,null);openOv('ov-mast'); }
+function editM(t,id,item){ S.mastType=t;S.mastId=id;$('mast-title').textContent='Edit '+t;$('mast-form').innerHTML=mastForm(t,item);openOv('ov-mast'); }
+function mastForm(t,item){
+  const m=S.masters;
+  if(t==='Company')return`<div class="fg"><label class="fl">Full Name</label><input id="mf-name" class="fi" value="${item?item.name:''}"></div>
+    <div class="fg"><label class="fl">Short Name</label><input id="mf-short" class="fi" value="${item?item.short||'':''}"></div>`;
+  if(t==='Salesman')return`<div class="fg"><label class="fl">Full Name</label><input id="mf-name" class="fi" value="${item?item.name:''}"></div>
+    <div class="fg"><label class="fl">Company</label><select id="mf-co" class="fi">${(m?.companies||[]).map(c=>`<option ${item&&item.company===c.name?'selected':''}>${c.name}</option>`).join('')}</select></div>
+    <div class="fg"><label class="fl">PIN</label><input id="mf-pin" type="password" inputmode="numeric" class="fi" value="${item?item.pin||'':''}"></div>`;
+  if(t==='Beat'){const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    return`<div class="fg"><label class="fl">Beat Name</label><input id="mf-name" class="fi" value="${item?item.name:''}"></div>
+    <div class="fg"><label class="fl">Salesman</label><select id="mf-sm" class="fi">${(m?.salesmen||[]).map(s=>`<option ${item&&item.salesman===s.name?'selected':''}>${s.name}</option>`).join('')}</select></div>
+    <div class="fg"><label class="fl">Company</label><select id="mf-co" class="fi">${(m?.companies||[]).map(c=>`<option ${item&&item.company===c.name?'selected':''}>${c.name}</option>`).join('')}</select></div>
+    <div class="fg"><label class="fl">Day</label><select id="mf-day" class="fi">${days.map(d=>`<option ${item&&item.day===d?'selected':''}>${d}</option>`).join('')}</select></div>`;}
+}
+async function submitMaster(){
+  const t=S.mastType,name=$('mf-name')?.value.trim();
+  if(!name){toast('Name required',true);return;}
+  const fields={name};
+  if(t==='Company')  fields.short=$('mf-short')?.value.trim();
+  if(t==='Salesman'){fields.company=$('mf-co')?.value;fields.pin=$('mf-pin')?.value;if(!fields.pin){toast('PIN required',true);return;}}
+  if(t==='Beat')     {fields.salesman=$('mf-sm')?.value;fields.company=$('mf-co')?.value;fields.day=$('mf-day')?.value;}
+  try{ await api('saveMaster',{type:t,id:S.mastId,fields,isNew:!S.mastId}); closeOv('ov-mast');toast('Saved');adTab('masters'); }catch(e){}
+}
+async function delM(t,id){ if(!confirm('Delete?'))return; try{ await api('deleteMaster',{type:t,id});toast('Deleted');adTab('masters'); }catch(e){} }
+
+// ═══════════════════════════════════════
+//  BOOT
+// ═══════════════════════════════════════
+init();
+</script>
+</body>
+</html>
